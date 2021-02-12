@@ -7,12 +7,12 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class S22064 {
+public class project {
 
     public static void main(String[] args) throws IOException {
         Container c = new Container();
         ContainerShip ship = new ContainerShip("MSC");
-        c.writeContainersToFile((int)ship.capacity);
+        c.writeContainersToFile((int) ship.getCapacity());
         Container[] containersToLoad = c.readContainersToArray();
         ship.sortAndLoad(containersToLoad);
         writeManifestFile(ship);
@@ -24,7 +24,7 @@ public class S22064 {
         int contPos = 0;
 
         FileWriter fileWriter = new FileWriter("Manifest.txt");
-        for(Container[][] containers1 : containerShip.board){
+        for(Container[][] containers1 : containerShip.getBoard()){
             for(Container[] container2 : containers1){
                 for(Container container: container2){
                     if(container!=null){
@@ -59,8 +59,9 @@ public class S22064 {
         }
         return containers;
     }
+}
 
-    static class Container{
+    class Container{
         protected long id = (long)(Math.random()*100000)+100000;
         protected double height, width, length, load, mass;
         protected String type;
@@ -252,7 +253,7 @@ public class S22064 {
         }
     }
 
-    static class Container20ft extends Container{
+    class Container20ft extends Container{
         public Container20ft() {
             height = 2.6;
             width = 2.400;
@@ -265,7 +266,7 @@ public class S22064 {
         }
     }
 
-    static class Container20ftHighCube extends Container{
+    class Container20ftHighCube extends Container{
         public Container20ftHighCube() {
             height = 2.6;
             width = 2.4;
@@ -278,7 +279,7 @@ public class S22064 {
         }
     }
 
-    static class Container20ftHardTop extends Container{
+    class Container20ftHardTop extends Container{
         public Container20ftHardTop() {
             height = 2.6;
             width = 2.400;
@@ -291,7 +292,7 @@ public class S22064 {
         }
     }
 
-    static class FlatRackContainer20ft extends Container{
+    class FlatRackContainer20ft extends Container{
         public FlatRackContainer20ft() {
             height = 2.6;
             width = 2.4;
@@ -304,7 +305,7 @@ public class S22064 {
         }
     }
 
-    static class RefrigeratedContainer20ft extends Container{
+    class RefrigeratedContainer20ft extends Container{
         boolean isBatteryLoaded = false;
         public RefrigeratedContainer20ft() {
             height = 2.6;
@@ -323,7 +324,7 @@ public class S22064 {
         }
     }
 
-    static class TankContainer extends Container{
+    class TankContainer extends Container{
         public TankContainer() {
             height = 2.6;
             width = 2.400;
@@ -336,10 +337,18 @@ public class S22064 {
         }
     }
 
-    static class ContainerShip{
+    class ContainerShip{
         private String name;
         private double capacity, length, width;
         private Container[][][] board;
+
+        public Container[][][] getBoard() {
+            return board;
+        }
+
+        public double getCapacity() {
+            return capacity;
+        }
 
         public ContainerShip(String name){
            this.name=name;
@@ -375,8 +384,8 @@ public class S22064 {
                 }
             }
 
-            Container[] sortedLighterContainers = sortByMassDescending(lighterContainers);
-            Container[] sortedHeavierContainers = sortByMassDescending(heavierContainers);
+            Container[] sortedLighterContainers = project.sortByMassDescending(lighterContainers);
+            Container[] sortedHeavierContainers = project.sortByMassDescending(heavierContainers);
 
             heavierIndex = 0;
             lighterIndex = 0;
@@ -413,7 +422,7 @@ public class S22064 {
        }
     }
 
-    static class Product {
+    class Product {
         protected String productCode, name;
 
         public Product generateRandomProduct(){
@@ -442,7 +451,7 @@ public class S22064 {
         }
     }
 
-    static class Food extends Product{
+    class Food extends Product{
         private String[] stuffToEat = {"bananas", "melons", "lemon", "lime", "grapefruit", "kiwi"};
         public Food() {
             int roll = (int) (Math.random()*stuffToEat.length);
@@ -451,7 +460,7 @@ public class S22064 {
         }
     }
 
-    static class LooseProduct extends Product{
+    class LooseProduct extends Product{
         private String[] looseStuff = {"sand", "quartz", "cement", "gravel", "scrap"};
         public LooseProduct(){
             int roll = (int) (Math.random()*looseStuff.length);
@@ -460,7 +469,7 @@ public class S22064 {
         }
     }
 
-    static class Machine extends Product{
+    class Machine extends Product{
         private String[] machines = {"car", "tractor", "forklift", "roller", "motorcycle"};
         public Machine() {
             int roll = (int)(Math.random()*machines.length);
@@ -469,7 +478,7 @@ public class S22064 {
         }
     }
 
-    static class LiquidProduct extends Product{
+    class LiquidProduct extends Product{
         private String[] liquids = {"juice", "beer", "chemicals", "fuel", "oil"};
         public LiquidProduct() {
             int roll = (int)(Math.random()*liquids.length);
@@ -478,7 +487,7 @@ public class S22064 {
         }
     }
 
-    static class WoodenProduct extends Product{
+    class WoodenProduct extends Product{
         private String[] wdnPrd = {"bed", "door", "chair", "wardrobe", "table", "desk", "bookcase"};
         public WoodenProduct(){
             int roll = (int)(Math.random()*wdnPrd.length);
@@ -487,7 +496,7 @@ public class S22064 {
         }
     }
 
-    static class FrozenProduct extends Product{
+    class FrozenProduct extends Product{
         private String[] coolProducts = {"fish", "calamari", "prawns", "meat", "cheese"};
         public FrozenProduct() {
             int roll = (int)(Math.random()*coolProducts.length);
@@ -496,7 +505,7 @@ public class S22064 {
         }
     }
 
-    static class AGD extends Product{
+    class AGD extends Product{
         private String[] agdProd = {"TV", "personalComputer", "monitor", "playStation", "washMachine", "fridge"};
         public AGD(){
             int roll = (int)(Math.random()*agdProd.length);
@@ -505,7 +514,7 @@ public class S22064 {
         }
     }
 
-    static class Material extends Product{
+    class Material extends Product{
         private String[] materials = {"copper", "lead", "magnesium", "bricks", "wood", "carbon"};
         public Material(){
             int roll = (int)(Math.random()*materials.length);
@@ -513,4 +522,3 @@ public class S22064 {
             productCode="MT0"+roll+name.substring(0, 2).toUpperCase();
         }
     }
-}
