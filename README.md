@@ -1,4 +1,4 @@
-# First school Java project -- Maritime transport (conatiner ships and containers)
+# First school Java project -- Maritime transport (conatiner ship and containers)
 Firstly, we had to create our own hierarchy of containers classes and realistic container ship.
 Secondly, write to a txt file a list of 15000 randomly generated container objects (with random values).
 Next we had to read them from the txt file and sort them in our own way to prevent any dangerous situations with mass location on the ship.
